@@ -1,0 +1,107 @@
+
+#_____________________________________1_________________________________
+
+
+class KeyIndex:
+
+    def __init__(self,arr):
+        self.k= None
+        max_value=arr[0]
+        self.min=arr[0]
+        
+        for i in arr:
+            if i < self.min:
+                self.min = i
+            if i > max_value:
+                max_value = i
+
+        self.k=[0]*(max_value-self.min+1)
+
+
+        for i in arr:
+            idx=i-self.min
+            if self.k[idx]==0:
+                self.k[idx]=1
+            else:
+                self.k[idx]+=1
+
+
+
+    def search(self,val):     
+        for i in range(len(self.k)):
+            if i+self.min==(val) and self.k[i]>=1:
+                return True      
+        return False
+
+
+
+    def sort(self):
+        i=0
+        for n in range(len(self.k)):
+            while self.k[n]>0:
+                arr[i]=n+self.min
+                self.k[n] = self.k[n]-1
+                i=i+1
+        return self.k
+
+arr=[5,1,3 ,2,-2,-1,6, 0,4]
+a=KeyIndex(arr)
+print(a.search(5))
+a.sort()
+print(arr)
+
+
+
+
+
+#______________________________________2________________________________
+
+
+class Hashing:
+    def __init__(self, arr):
+        self.arr = arr
+        self.hashing_arr = [0]*9
+
+    def hash_calculator(self,single_string):
+        total_alphabet = 0
+        total_digits = 0
+
+        for i in single_string:
+            if i>='B' and i<='Z' and i!='E' and i!='I' and i!='O' and i!='U':
+                total_alphabet = total_alphabet + 1
+
+            elif i>='0' and i<='9':
+                total_digits = total_digits + int(i)
+
+        calculation = ((total_alphabet*24)+total_digits)%9
+
+        return calculation
+
+
+
+    def linear_probing(self):
+        for i in self.arr:
+            idx_value = self.hash_calculator(i)
+            
+            if self.hashing_arr[idx_value] == 0:   # jodi ei index er value 0 thake/ kono value na thake
+                self.hashing_arr[idx_value] = i    # then oi index a value bosabo
+            
+            else: 
+                while self.hashing_arr[idx_value] != 0:   # jodi ei index er value 0 na thake/ kono value thake
+                    idx_value = (idx_value+1)%9               # then porer index value bosabo
+                self.hashing_arr[idx_value] = i
+
+
+
+
+arr = ['A37BC124','CB5A124','DEF456','HG2W654','ZYZ987','ST1E89B8A32','O1UY982','L2Z6A111']
+
+l1 = Hashing(arr)
+l1.linear_probing()
+print(l1.hashing_arr)
+
+
+
+
+
+

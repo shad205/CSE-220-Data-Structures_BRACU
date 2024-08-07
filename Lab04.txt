@@ -1,0 +1,160 @@
+
+
+# Task 1
+
+class Stack:
+    stack=[]
+    pointer=-1
+    
+    def push(self, element):
+        if self.pointer==len(self.stack):
+            print('Stack overflow')
+        else:
+            self.stack.append(element)
+            self.pointer=self.pointer+1
+        
+    def peek(self):
+        if self.pointer==0:
+            print('Stack underflow')
+        else:
+            return (self.stack[self.pointer])
+        
+    def pop(self):
+        if self.pointer==-1:
+            print('Stack underflow')
+        else:
+            value= self.stack[self.pointer]
+            self.stack=self.stack[:-1]                  # remove last element
+            self.pointer = self.pointer-1
+            return value
+            
+p1=Stack()
+
+user_input=input("Please enter the Arithmetic expression:")
+
+open_bracket=[]
+close_bracket=[]
+boolean=True
+count=0
+for i in str(user_input):
+    if i == "(" or i == "{" or i == "[":
+        p1.push(i)
+        count=count+1 
+        #print(count)                                     # kon kon position a opening braket ase                 
+        open_bracket.append(count)                        # j j position a opening braket ase sei integer 
+                                                             #number open_bracket variable a input hocce   
+        #print(open_bracket)
+    elif i == ")" or i == "}" or i == "]":
+        count=count+1
+        #print(count)                                     #  kon kon position a closing braket ase 
+        close_bracket.append(count)                       # j j position a closing braket ase sei integer 
+                                                            #number close_bracket variable a input hocce 
+             
+        if p1.pointer == -1:                              # jokhon kono opening braket push kora nai
+            boolean=False
+            last_closing_braket_position=close_bracket.pop()                     # close_bracket list er moddhe last closing braket 
+                                                                                    #er position te store kortisi
+            print("The expression is NOT correct")
+            print("Error at character # ",last_closing_braket_position,". '",i,"'- not opened" )
+            break
+        
+        else:                                                                    #  jokhon at least akta opening braket push kora ase
+            stack_check= p1.pop()                                                # last element stack_check a stor korsi
+            last_opening_braket_position=open_bracket.pop()                      # open_bracket list er moddhe last opening braket er 
+                                                                                    #position te store kortisi
+            if stack_check== "(" and i==")":
+                continue
+            elif stack_check== "{" and i=="}":
+                continue
+            elif stack_check== "[" and i=="]":
+                continue
+            else:
+                boolean=False
+                print("The expression is NOT correct")
+                print("Error at character # ",last_opening_braket_position,". '",stack_check,"'- not closed.")
+                break
+                
+    else:
+        count = count+1
+    
+if boolean == True:
+    print("The expression is correct")
+
+
+#___________________________________________________________________________________________________
+
+
+# Task 2
+
+class Node:
+    def __init__(self,value):
+        self.value=value
+        self.ref=None
+        
+class Stack:
+    head=None
+    
+    def push (self,data):
+        if self.head == None:
+            self.head= Node(data)
+        else:
+            n = Node(data)
+            n.ref = self.head
+            self.head = n
+            
+    def peek(self):
+        return(self.head.value)
+    
+    def pop(self):
+        temp= self.head
+        self.head=self.head.ref
+        temp.ref=None
+        return(temp.value)
+    
+
+p1=Stack()
+
+user_input=input("Please enter the Arithmetic expression: ")
+
+open_bracket=[]
+close_bracket=[]
+boolean=True
+count=0
+for i in str(user_input):
+    if i == "(" or i == "{" or i == "[":
+        p1.push(i)
+        count=count+1 
+        open_bracket.append(count)        
+        #print(open_bracket)
+    elif i == ")" or i == "}" or i == "]":
+        count=count+1                    
+        close_bracket.append(count)        
+             
+        if p1.head == None:            
+            boolean=False
+            last_closing_braket_position=close_bracket.pop()       
+            print("The expression is NOT correct")
+            print("Error at character # ",last_closing_braket_position,". '",i,"'- not opened" )
+            break
+        
+        else:                            
+            stack_check= p1.pop()                
+            last_opening_braket_position=open_bracket.pop()           
+            if stack_check== "(" and i==")":
+                continue
+            elif stack_check== "{" and i=="}":
+                continue
+            elif stack_check== "[" and i=="]":
+                continue
+            else:
+                boolean=False
+                print("The expression is NOT correct")
+                print("Error at character # ",last_opening_braket_position,". '",stack_check,"'- not closed.")
+                break
+                
+    else:
+        count = count+1
+    
+if boolean == True:
+    print("The expression is correct")
+

@@ -1,0 +1,249 @@
+#Task 1
+#______________ 1 no _____________
+
+class Node:
+    def __init__(self, value, next, previous):
+        self.value = value
+        self.next = next
+        self.prev = previous
+
+
+class DoublyList:
+        
+    def __init__(self,a):
+        self.head = Node(None,None,None)
+        self.head.next=self.head
+        self.head.prev=self.head
+        
+        n=self.head
+        for i in a:
+            newnode=Node(i,None,None)
+            n.next=newnode
+            newnode.prev=n
+            n=n.next
+       
+        n.next=self.head
+        self.head.prev=n
+        #print(n.value)
+        
+
+#____________ 2 no ________________
+
+
+        
+    def showList(self):
+        n = self.head.next
+        if self.head == None:
+            print("Empty List")
+            
+        else:
+            while n != self.head:
+                print(n.value, end=" ")
+                n = n.next
+            print()
+
+
+#______________3 no_____________
+
+    
+    def countnode(self):
+        count=0
+        n=self.head.next
+        while n != self.head:                  
+            count= count + 1
+            n= n.next                      
+        return count
+
+
+    
+        
+    def insert1(self,newElement):
+            n = self.head.next
+            tail= self.head.prev
+            while n != self.head:
+                if n.value==newElement:
+                    print("Key alreay exists!")
+                    break
+                n = n.next
+            
+            
+            newNode = Node(newElement,None,None)
+    
+            tail.next= newNode
+            newNode.prev=tail
+            newNode.next=self.head
+            self.head.prev=newNode
+
+
+
+#______________4 no_____________
+
+
+
+    def nodeAt(self,index): 
+        if index<0 or index>self.countnode():
+            return None
+        else:
+            n=self.head.next
+            count=0
+            while n != self.head :
+                if index==count:
+                    return n
+                
+                count=count+1
+                n=n.next
+
+
+
+
+    def insert(self, newElement, index):
+        
+        if(index<0 or index>self.countnode()):
+                          
+            return None
+        newNode = Node(newElement, None,None)              
+        if (index==0):                       
+            newNode.next = self.head        
+            self.head = newNode          
+
+        else:
+            pred = self.nodeAt(index-1)   
+            newNode.next = pred.next
+            pred.next = newNode
+
+
+
+
+#______________5 no_____________
+
+
+
+    def remove(self, index):
+
+        if(index<0 or index>self.countnode()):
+            return None
+        removedNode = None
+
+        if (index==0):
+            tail=self.nodeAt(index+1)
+            self.head.next = tail
+            tail.prev=self.head
+
+        else:
+            pred= self.nodeAt(index-1)
+            removedNode = pred.next
+            pred.next = removedNode.next
+            removedNode.next.prev=pred
+            
+            
+
+        removedNode.element = None
+        removedNode.next = None
+
+        
+#______________6 no_____________
+
+
+
+    def removeKey(self,deletekey):
+        n = self.head.next
+        if n.value == None:
+            print("This element is not exsis in list")
+
+        else:
+            n = self.head.next
+            value_found = False
+    
+            while n!= self.head:
+                if n.value==deletekey:
+                    prev_node = n.prev
+                    post_node = n.next
+                    prev_node.next = post_node
+                    post_node.prev = prev_node
+                    value_found = True
+                n = n.next
+            if value_found==False:
+                print('Input Key is not found!')
+                
+            else:
+                return deletekey
+
+
+
+
+
+
+#_____________Tester Class____________________
+
+
+
+
+print(' 1 & 2 no output: ')
+a=[1,2,3,4,5,6,7]                
+l1=DoublyList(a) 
+l1.showList()
+print('#############################################')
+
+print(' 3 no output: ')
+l1.insert1(222)
+l1.showList()
+print('#############################################')
+
+print(' 4 output: ')
+l1.insert(222,3)
+l1.showList()
+print('#############################################')
+
+print(' 5 no output: ')
+l1.remove(2)
+l1.showList()
+print('#############################################')
+
+print(' 6 no output: ')
+l1.removeKey(4)
+l1.showList()
+print('#############################################')
+
+
+
+
+
+
+
+#______________________output____________________________
+
+
+
+1 & 2 no output: 
+1 2 3 4 5 6 7 
+#############################################
+ 3 no output: 
+1 2 3 4 5 6 7 222 
+#############################################
+ 4 output: 
+1 2 3 222 4 5 6 7 222 
+#############################################
+ 5 no output: 
+1 2 222 4 5 6 7 222 
+#############################################
+ 6 no output: 
+1 2 222 4 5 6 7 222 
+#############################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

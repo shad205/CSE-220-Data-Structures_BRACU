@@ -1,0 +1,225 @@
+#_______________________________1 no__________________________
+
+def selection_short(arr,i):
+  if i==len(arr):
+    return arr
+  else:
+    min_idx=i
+    get_min_idx=check(arr,i ,min_idx)
+    arr[i],arr[get_min_idx]=arr[get_min_idx],arr[i]   
+  return selection_short(arr,i+1)
+
+def check(arr,j,min_idx):
+  if j==len(arr):
+    return min_idx
+  else:
+    if arr[j]<arr[min_idx]:
+      min_idx=j
+  return check(arr,j+1,min_idx)
+
+
+selection_short([2,4,6,3,5,1,0,1],0)
+
+
+#_______________________________2 no__________________________
+
+
+def insertion_sort(arr,i):
+  if i==len(arr):
+    return arr
+  else:
+    check(arr,i-1)
+    return insertion_sort(arr,i+1)
+
+def check(arr,j):
+  if j==-1:
+    return arr
+  else:
+    if arr[j]>arr[j+1] :
+      arr[j+1],arr[j]=arr[j],arr[j+1]
+      return check(arr,j-1)
+
+
+print(insertion_sort([2,4,6,3,5,1,0,1],0))   
+
+
+#_______________________________3 no__________________________
+
+class Node:
+    def __init__(self,value,next=None):
+        self.value = value
+        self.next = next
+class singly_linked_list():
+    def __init__(self,a):
+        self.head = None
+        self.tail = None
+        for i in a:
+            n = Node(i)
+            if self.head == None:
+                self.head = n
+                self.tail = n
+            else:
+                self.tail.next = n
+                self.tail = n
+
+
+    def print_list(self):
+        n=self.head
+        if self.head == None:
+            print("Empty List")
+            
+        else:
+            while n != None:
+                print(n.value, end=" ")
+                n = n.next
+                    
+            
+    def bubble_sort(self):
+            n=self.head
+            while n!=None:
+                next_ele=n.next
+                while next_ele!=None:
+                    
+                    if n.value>next_ele.value:
+                        n.value,next_ele.value=next_ele.value,n.value
+                        
+                    next_ele=next_ele.next
+                n=n.next
+        
+
+l1 = singly_linked_list([2,4,6,3,5,1,0,1])
+l1.bubble_sort()
+l1.print_list()
+
+
+#_______________________________4 no__________________________
+
+
+class Node:
+    def __init__(self,value,next=None):
+        self.value = value
+        self.next = next
+class singly_linked_list():
+    def __init__(self,a):
+        self.head = None
+        self.tail = None
+        for i in a:
+            n = Node(i)
+            if self.head == None:
+                self.head = n
+                self.tail = n
+            else:
+                self.tail.next = n
+                self.tail = n
+
+
+    def print_list(self):
+        n=self.head
+        if self.head == None:
+            print("Empty List")           
+        else:
+            while n != None:
+                print(n.value, end=" ")
+                n = n.next
+
+    def selection_sort(self):
+        n = self.head
+        while n != None:
+
+            min_node = n
+            j = n.next
+
+            while j != None:
+                if j.value < min_node.value:
+                    min_node = j
+                j = j.next
+            n.value,min_node.value = min_node.value, n.value
+            
+            n = n.next
+
+l1 = singly_linked_list([2,4,6,3,5,1,0,1])
+l1.selection_sort()
+l1.print_list()
+
+
+#_______________________________5 no__________________________
+
+class Node:
+    def __init__(self,value,next,prev):
+        self.value=value
+        self.prev=prev
+        self.next=next
+class DoublyList:
+    def __init__(self,a):
+        self.head = self.next = None
+        
+        for i in a:
+            new_node=Node(i,None,None)
+            if self.head==None:
+                self.head=new_node
+                self.tail=new_node
+            else:
+                self.tail.next=new_node
+                new_node.prev=self.tail
+                self.tail=new_node
+        
+    def print_list(self):
+      n=self.head
+      if self.head == None:
+          print("Empty List")
+          
+      else:
+          while n != None:
+              print(n.value, end=" ")
+              n = n.next
+    def insertion_sort(self):
+        i=self.head
+        while i  != None:
+            j=i
+            while j!=None:
+                if j.next!=None:
+                    if j.value>j.next.value:
+                        j.value,j.next.value=j.next.value,j.value
+                    else:
+                        break
+                j=j.prev
+            i=i.next
+l1=DoublyList([2,4,6,3,5,1,0,1])
+l1.insertion_sort()
+l1.print_list()
+
+
+#__________________________________Task 6_______________________________
+
+def binary_search(arr, lower_bound, higher_bound, searching_value):
+  if lower_bound>higher_bound:
+    return False
+
+  else:
+    mid_value_idx = (lower_bound+ higher_bound)//2
+    if arr[mid_value_idx]==searching_value:
+      return True
+    elif arr[mid_value_idx]<searching_value:
+      return binary_search(arr, mid_value_idx+1, higher_bound, searching_value)
+    else:
+      return binary_search(arr, lower_bound, mid_value_idx-1, searching_value)
+
+
+
+arr=[1,2,3,4,5,6]
+
+print(binary_search(arr,0,len(arr)-1,7))
+
+
+#__________________________________Task 7_______________________________
+
+def memoFibonacci(num):
+  if num<2:
+    return num 
+  else:
+    if array[num]==0:
+      array[num]=memoFibonacci(num-1)+memoFibonacci(num-2)
+    return array[num]
+num=int(input("Enter the number: "))   
+array = [0]*(num+1) 
+print(memoFibonacci(num))

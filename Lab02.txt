@@ -1,0 +1,444 @@
+#Task 1
+class Node:
+    def __init__(self, element, next):
+        self.element = element
+        self.next = next
+
+#Task 2
+
+class MyList:
+#______________1__________________
+
+    def __init__(self,a):
+        self.head=None
+        tail=None
+        
+        for i in a:
+            newNode=Node(i,None)
+            if (self.head==None):
+                self.head=newNode
+                tail=newNode
+            else:
+                tail.next=newNode
+                tail=newNode
+ 
+#__________________2__________________
+            
+    def showList(self):
+        new = self.head
+        while new != None:
+            print(new.element , end = " ")
+            new = new.next
+        print("\n")
+            
+    
+#__________________3__________________
+    
+    def isEmpty(self):
+        if self.head == None:
+            return True
+        else:
+            return False
+        
+    
+#__________________4__________________
+    
+    
+    def clear(self):
+        
+        new = self.head
+        while new != None:
+            new.element=None
+            new=new.next
+            new=self.head
+        return new.element
+    
+#__________________5__________________
+                      
+               
+    def Insert1(self, newElement):
+        new_node =  Node(newElement, None)
+        
+        tail = self.head
+        while tail!= None:
+            if tail.element == newElement:
+                print("newElement already exist in the list")
+                return
+            tail = tail.next
+        
+        new = self.head
+        while new.next != None:
+            new = new.next
+            
+        new.next = new_node
+
+#__________________6_________________
+    
+    def Insert2(self, newElement , index ):
+        self.index = index
+        self.newElement = newElement
+        
+        tail = self.head
+        while tail != None:
+            if tail.element == self.newElement:
+                print("newElement already exist in the list")
+                return
+            tail = tail.next        
+        
+        count = 0
+        tail1 = self.head
+        
+        while tail1 != None:
+            tail1 = tail1.next
+            count +=1  
+        
+        if (index<0) or (index >count):
+            print('\nInvalid Index')
+            
+        else:
+            if self.index == 0:
+                node1 = Node(newElement, self.head)
+                self.head = node1
+
+            else:
+                count = 0
+                tail1 = self.head
+                
+                while tail1 != None:
+                    if count == index-1:
+                        node1 = Node(newElement, tail1.next)
+                        tail1.next = node1
+                        break
+                    else:
+                        pass
+
+                    tail1 = tail1.next
+                    count +=1
+
+
+
+
+#__________________7__________________
+
+
+
+    def remove(self, deletekey):
+
+        tail = self.head
+        final_tail = None
+        
+        while tail!= None:
+            if tail.element == deletekey:
+                if final_tail == None:
+                    self.head = tail.next
+                else:
+                    final_tail.next = tail.next
+                return deletekey
+            else:
+                pass
+            
+            final_tail = tail
+            tail = tail.next
+
+
+
+
+
+
+#Task 3
+#__________________1__________________
+
+
+    def evenNumberChecker(self):
+        h1 = None
+        ttail = None
+        new = self.head
+        while new!= None:
+            if new.element%2== 0:
+                new_node1 = Node(new.element, None)
+                if h1 == None:
+                    h1 = new_node1
+                    ttail = new_node1
+                else:
+                    ttail.next = new_node1
+                    ttail = new_node1
+            new=new.next
+        n_head = h1
+        while n_head!= None:
+            print(n_head.element ,end=" ")
+            n_head = n_head.next
+        print("\n")
+        return h1
+
+
+#__________________2__________________
+
+    def elementchecker(self,element):
+        new = self.head
+        element_in =  False
+        while new!= None:
+            if new.element == element:
+                element_in = True
+                break
+            else:
+                pass
+            new=new.next
+        print(element_in)
+
+
+
+#__________________3_________________
+
+
+    def reverse_List(self):
+        new = self.head
+        new2 = None
+        while new!= None:
+            next_Node = new.next
+            new.next = new2
+            new2 = new
+            new = next_Node
+        self.head = new2
+        self.showList()
+        
+        
+#__________________4__________________
+
+    def sort(self):
+        
+        tail = self.head
+        while tail != None :
+            tail_update = tail.next
+            
+            while tail_update != None:
+                
+                if tail.element > tail_update.element :
+                    temp = tail.element
+                    tail.element = tail_update.element
+                    tail_update.element = temp
+                    
+                else:
+                    pass
+                    
+                tail_update = tail_update.next
+            tail = tail.next    
+            
+
+
+#__________________5__________________
+
+
+    def sum(self):
+       summation = 0
+       tail = self.head
+       while tail != None:
+           summation += tail.element
+           tail = tail.next
+           
+       print('Sum: ',summation)
+
+
+
+#__________________6__________________
+
+  
+    def rotate_list(self, type, k):
+        
+        tail = self.head
+        head = self.head
+        
+        previous_head = None
+        
+        count = 1
+        while tail.next !=None:
+            previous_head = tail
+            tail = tail.next 
+            count += 1
+            
+        temp_head = head
+        if type == "left":
+            for i in range(k):
+                tail.next = head
+                temp_head = head.next
+
+                head.next = None
+                tail = head
+
+                head = temp_head
+
+                self.head = head
+
+
+        elif type == "right":
+        
+                self.rotate_list("left", count - k)
+
+
+
+
+
+
+
+#_____________Tester Class____________________
+
+
+
+
+
+# Task 1 & 2
+
+print('Task(2) 1 no output: ')
+a=[10,20,30,40,50]
+l1=MyList(a)
+l1.showList()
+print('#############################################')
+
+# 2 no
+print('2 no output: ')
+l1.showList()
+print('#############################################')
+
+# 3 no
+print('3 no output: ')
+print(l1.isEmpty())
+l1.showList()
+print('#############################################')
+
+# 5 no
+print('5 no output: ')
+l1.Insert1(60)
+l1.showList()
+print('#############################################')
+
+# 6 no
+print('6 no output: ')
+l1.Insert2(70,4)
+l1.showList()
+print('#############################################')
+
+# 7 no
+print('7 no output: ')
+l1.remove(20)
+l1.showList()
+print('#############################################')
+print('#############################################')
+
+
+
+
+
+
+# Task 3
+# 1 no
+
+print('Task(3) 1 no output: ')
+b=[1,2,5,3,8]
+l2 = MyList(b)
+l2.evenNumberChecker()
+print('#############################################')
+
+# 2 no
+print('2 no output: ')
+l2.elementchecker(8)
+print('#############################################')
+
+# 3 no
+print('3 no output: ')
+l2.reverse_List()
+print('#############################################')
+
+# 4 no
+print('4 no output: ')
+l2.sort()
+l2.showList()
+print('#############################################')
+
+# 5 no
+print('5 no output: ')
+l2.sum()
+print('#############################################')
+
+# 6 no
+print('6 no output: ')
+l2.rotate_list('left', 2)
+l2.rotate_list('right', 2)
+l2.showList()
+print('#############################################')
+
+
+
+
+
+
+
+______________________output____________________________
+
+
+
+Task(2) 1 no output: 
+10 20 30 40 50 
+
+#############################################
+2 no output: 
+10 20 30 40 50 
+
+#############################################
+3 no output: 
+False
+10 20 30 40 50 
+
+#############################################
+5 no output: 
+10 20 30 40 50 60 
+
+#############################################
+6 no output: 
+10 20 30 40 70 50 60 
+
+#############################################
+7 no output: 
+10 30 40 70 50 60 
+
+#############################################
+#############################################
+Task(3) 1 no output: 
+2 8 
+
+#############################################
+2 no output: 
+True
+#############################################
+3 no output: 
+8 3 5 2 1 
+
+#############################################
+4 no output: 
+1 2 3 5 8 
+
+#############################################
+5 no output: 
+Sum:  19
+#############################################
+6 no output: 
+1 2 3 5 8 
+
+#############################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

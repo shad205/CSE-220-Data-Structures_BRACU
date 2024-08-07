@@ -1,0 +1,398 @@
+############################################## 1: Shift Left k Cells##########################################  
+
+def shiftLeft(source,k):
+
+    i=len(source)-1 
+    while(i>=k):
+        source[i-k]=source[i]  
+        i=i-1
+ 
+    i=len(source)-1
+    while(i>=k):
+        source[i]=0 
+        i=i-1
+
+source=[10,20,30,40,50]
+shiftLeft(source,3)
+print(source)
+
+
+############################################# 2: Rotate Left k cells########################################### 
+
+
+def rotateLeft(source,k):
+    tempArray = [0]*len(source)
+    
+    i=len(source)-1    #  index number
+    while(i>=k):       # for leftshift doing this step
+        tempArray[i-k]=source[i]  #shifting elements 
+        i=i-1
+    
+    m = 0    
+    j=len(source)-k   
+    while (j<len(source)):
+        tempArray[j] = source[m]
+        j=j+1
+        m=m+1
+    return tempArray
+
+source=[10,20,30,40,50,60]
+k=3
+print(rotateLeft(source,k))    
+
+
+
+#########################################3.Remove an element from an array###################################
+
+
+def remove(source,size,idex):
+    if 0<idex<size:
+        
+        i=len(source)-1 
+        while(i>idex):
+            source[idex]=source[idex+1]
+            idex= idex+1
+    else:
+        print("Index is not valid")
+
+    
+source=[10,20,30,40,50,0,0]
+size=5
+idex=2
+remove(source,size,idex)
+print(source) 
+    
+
+
+
+################################ 4. Remove all occurrences of a particular element from an array################
+
+
+def removeAll( source, size, element):
+    
+    for k in range(size):
+        if source[k] == element and source[k]==source[k+1] :
+            source[k] = source[k + 1]        
+    
+    
+        for i in range(size):
+            if source[i] == element:
+                for j in range(i, size):
+                    source[j] = source[j + 1]
+
+
+source=[10,2,30,2,50,2,2,60,0,0]
+size=8
+element=2
+removeAll(source,size, element)
+print(source)
+
+
+
+
+################################################ 5. Splitting an Array ##########################################
+
+
+def weight_balance(array_A):
+    
+    leftSum = 0     
+    rightSum = 0     
+    
+    output = False
+    
+    for i in range(len(array_A)):         # i=0, range(0,5)
+        leftSum = leftSum + array_A[i]          
+                                             # leftSum = 0 + array_A[0]
+                                             # leftSum = 0 + 10 = 10
+                                                 # leftSum = 10 + array_A[1]
+                                                 # leftSum = 10 + 3 = 13
+                                                   #-------------
+        
+        
+        for j in range(i + 1, len(array_A)):         # j=1, range(1,5)
+            rightSum = rightSum + array_A[j]                 
+                                                     # rightSum = rightSum + array_A[1]
+                                                     # rightSum = 0 + 3 = 3
+                                                           # rightSum = rightSum + array_A[2]
+                                                           # rightSum = 3 + 10 = 13
+                                                                # rightSum = rightSum + array_A[3]
+                                                                # rightSum = 13 + 2 = 15
+                                                                    # rightSum = rightSum + array_A[4]
+                                                                    # rightSum = 15 + 1 = 16
+            
+            
+            
+        if leftSum == rightSum:                  #  13==13
+            output = True
+            
+            break
+        
+        else:
+            rightSum = 0
+        
+    return output 
+
+print(weight_balance(array_A=[10, 3, 10, 2, 1]))
+
+
+
+
+####################################################### 6. Array series ########################################
+
+
+
+def series(length):
+    
+    
+    array_create = [0]*(int(length)*int(length))                  
+    
+    for group in range(1, int(length) + 1):               # range(1,5)
+                                                            #group = 1 
+                                                             #next loop group=2
+                                                                 #------------
+        
+    
+        for value in range(1, group + 1):                # value range(1,2)    [when group=1]
+                                                         #value = 1
+                                                             # range(1,3)  [when group=2]
+                                                             #value = 1    [first loop]
+                                                             #value = 2    [second loop]
+            
+            index = group*int(length)-value                        # index = 1*4-1=3 [when group=1, value=1]
+            array_create[index] = value                       # array_create[3] = 1
+                                                                   # index = 2*4-1=7 [when group=2, value=1]
+                                                                   # array_create[7] = 1
+                                                                   # index = 2*4-2=6 [when group=2, value=2]
+                                                                   # array_create[6] = 2
+                                                                      #------------
+        
+    return array_create
+
+print(series(input('Enter a integer n: ')))
+
+
+
+
+
+############################################################7. Max Bunch Count########################################
+
+
+def bunch(array):
+    
+    largest_bunch_element_number  = 0
+    num = 1
+    
+    for i in range(len(array) - 1):        # range(0,6)
+       
+        if array[i] != array[i + 1]:       # when teo consecutive no are not same
+            
+            num=1
+    
+    
+        elif array[i] == array[i + 1]:     # when i=4: array[4] == array[5]; 4==4
+            num=num+1                      # num = num + 1; num = 1 + 1 =2
+                                                # when i=5: array[5] == array[6]; 4==4
+                                                #num = num + 1; num = 2 + 1 =3
+            
+           
+            if num > largest_bunch_element_number:           # when i=4: 2>0
+                largest_bunch_element_number = num           # maxbunch = 2
+                                                                   # when i=5: 3>2
+                                                                   # maxbunch = 3
+            
+    return largest_bunch_element_number
+
+array= [1,2,2,3,4,4,4]
+print(bunch(array))
+
+
+
+################################################################## 8. Repetition ###################################
+
+
+
+def repetition(array):
+    length=len(array)
+    repetition = 'NO'
+    temp_array1 = [0]*length 
+    temp_array2 = [0]*length 
+
+    temp_array1_idx = 0
+    temp_array2_idx = 0
+
+    for i in range(length):      # i range(0,8)
+        if array[i] not in temp_array2:                    # when count=0; 4 not in temp_array2
+            temp_array2[temp_array2_idx] = array[i]        # temp_array2[0] = array[0]; temp_array2[0]=4
+            temp_array2_idx= temp_array2_idx + 1
+            
+            
+            sum = 0
+            for counter in range(length):                  # counter range=(0,8)
+                if array[i] == array[counter]:             # array[0] == array[0]; 4==4
+                    sum = sum + 1                          #sum = 0 + 1 =1
+            if sum > 1:
+                temp_array1[temp_array1_idx] = sum         # temp_array1 er 1st index= sum
+                temp_array1_idx=temp_array1_idx + 1
+                
+                
+    for j in range(length):     # j range(0,8)
+        if temp_array1[j]==0:
+            pass
+        if temp_array1[j]!=0:
+            for k in range(length):    # k range(0,8)
+                if k != j and temp_array1[j]==temp_array1[k]:
+                        repetition = 'YES'
+
+    if repetition == 'YES':
+        return True
+    else:
+        return False
+
+
+array = [4,5,6,6,4,3,6,4]
+print(repetition(array))
+
+
+
+
+
+
+#################################################### Circular Array: 1. Palindrome ###############################
+
+
+def palindrome(array, start, size):
+        
+    idx1 = start            
+    idx2 = (start + size-1) % len(array)  
+    output = True
+    
+    i=0
+    while i < (start//2):   # up to half of the array
+        
+        if array[idx1]!= array[idx2]:        
+            output = False 
+            break    
+
+        idx1 = (idx1 + 1) % len(array)    
+        idx2 = idx2-1   
+
+        if idx2 < 0:     
+            idx2 = len(array) - 1
+
+        i=i+1    
+
+    return output
+    
+print(palindrome( [20,10,0,0,0,10,20,30], 5, 5)) 
+
+
+
+
+
+################################################# Circular Array: 2. Intersection ####################################
+
+
+def intersection(array_1, array_2, start_1, start_2, size_1, size_2):
+    
+    array_output = []
+    idx_1 = start_1
+    count = 0
+    while count<size_1:         #0<5, 1<5, 2<5,.....
+        if array_1[idx_1] not in array_output:
+            idx_2 = start_2
+            
+            i = 0
+            while i < size_2:
+                if (array_2[idx_2] not in array_output) and array_1[idx_1] == array_2[idx_2]:
+                        array_output=array_output + [array_1[idx_1]]
+                else:
+                    pass
+                        
+                i=i+1
+                
+                idx_2 = (idx_2+1) % len(array_2)
+        idx_1 = (idx_1+1) % len(array_1)
+        
+        
+        count=count+1
+    return array_output
+
+array_1 = [40,50,0,0,0,10,20,30]
+array_2 = [10,20,5,0,0,0,0,0,5,40,15,25]
+start_1 =5
+start_2=8
+size_1=5
+size_2=7
+
+output = intersection(array_1, array_2, start_1, start_2, size_1, size_2)
+print(output) 
+
+
+
+
+#################################################### 3. Circular Array: ##############################################
+
+
+
+import random                  # for randomly get a number
+
+def musical_chair(game_players):
+    
+    length = len(game_players)                #length = 7
+     
+    n=1
+    
+    infinite = 1
+    while infinite == 1:            # Here create infinite loop
+        number=random.randint(0,3)               # number = random.randint(start, end)
+        
+        if number!= 1:               # if it is not last round or not last person
+            
+            new = game_players[length - 1]   
+
+            i = length - 1  
+            while(i >= 1):
+                game_players[i] = game_players[i - 1]      # right shift
+
+                i=i-1
+
+            game_players[0] = new    
+            
+            
+            
+        else:                 # number == 1
+            
+            eliminated = length // 2     # the participants at position (n/2) will be eliminated where n=numbers of player
+            
+            j = eliminated
+            while j < length - 1:
+                
+                game_players[j] = game_players[j + 1]    # left shift
+                
+                j=j+1
+            
+            
+            
+            game_players = game_players[0 : length-1]     # decreasing length size
+            
+            length=length-1   
+
+            print("Existent player in",n,"th round: ", game_players)   
+            
+            n=n+1
+            
+            
+                  
+        if length == 1:             #only remaining 1 player and others are eliminated 
+                
+                print("Final winner : ", end =" ")   
+                
+                return game_players[0]
+                
+                break    
+                
+                    
+print(musical_chair(["A1 named player" , "A2 named player" , "A3 named player", "A4 named player" , "A5 named player" ,"A6 named player", "A7 named player"]))
+
+
+
